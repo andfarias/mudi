@@ -34,4 +34,5 @@ public class PedidoController {
 		pedidoRepository.save(pedido);
 		return "pedido/formulario";
 	}
+	
 }
