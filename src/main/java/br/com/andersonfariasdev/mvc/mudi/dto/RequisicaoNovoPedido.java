@@ -2,6 +2,7 @@ package br.com.andersonfariasdev.mvc.mudi.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import br.com.andersonfariasdev.mvc.mudi.enumerator.StatusPedido;
 import br.com.andersonfariasdev.mvc.mudi.model.Pedido;
 
 public class RequisicaoNovoPedido {
@@ -40,13 +41,14 @@ public class RequisicaoNovoPedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	public Pedido toPedido() {
 		Pedido pedido = new Pedido();
 		pedido.setDescricao(descricao);
 		pedido.setNomeProduto(nomeProduto);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
-		//pedido.setStatus(StatusPedido.AGUARDANDO);
+		pedido.setStatus(StatusPedido.AGUARDANDO);
 		return pedido;
 	}
 	

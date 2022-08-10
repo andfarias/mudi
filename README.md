@@ -1,11 +1,18 @@
 # mudi
+
+## 📝 Sobre
+
 Spring MVC: Aplicação web com Thymeleaf e Bootstrap
 
-Sistema MED2 - Unimed Rio Preto
+## 🧪 Tecnologias
 
-Tecnologias:
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-Java 1.8
-Spring Boot 2.7.2
-Spring Data JPA
-Thymeleaf (Front-end)
+- Java 17
+- Spring Boot 2.7.2
+- Spring Data JPA
+- Thymeleaf (Front-end)
+
+---
+
+Feito com 🤍 by Anderson Farias.
