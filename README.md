@@ -11,6 +11,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Java 17
 - Spring Boot 2.7.2
 - Spring Data JPA
+- Spring Security
 - Thymeleaf (Front-end)
 
 ---
