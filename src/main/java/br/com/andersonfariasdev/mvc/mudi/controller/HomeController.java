@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.andersonfariasdev.mvc.mudi.enumerator.StatusPedido;
 import br.com.andersonfariasdev.mvc.mudi.repository.PedidoRepository;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/home")
 public class HomeController {
@@ -19,8 +21,8 @@ public class HomeController {
 	private PedidoRepository pedidoRepository;
 
 	@GetMapping
-	public String home(Model model) {
-		model.addAttribute("pedidos", pedidoRepository.findAll());
+	public String home(Model model, Principal principal) {
+		model.addAttribute("pedidos", pedidoRepository.findAllByUsuario(principal.getName()));
 		return "home";
 	}
 

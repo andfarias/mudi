@@ -3,14 +3,10 @@ package br.com.andersonfariasdev.mvc.mudi.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import br.com.andersonfariasdev.mvc.mudi.enumerator.StatusPedido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pedido {
@@ -24,7 +20,11 @@ public class Pedido {
 	private String urlProduto;
 	private String urlImagem;
 	private String descricao;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private User user;
+
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 	
@@ -70,5 +70,12 @@ public class Pedido {
 	public void setStatus(StatusPedido status) {
 		this.status = status;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
