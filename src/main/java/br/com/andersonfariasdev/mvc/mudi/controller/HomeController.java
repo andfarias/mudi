@@ -1,17 +1,18 @@
 package br.com.andersonfariasdev.mvc.mudi.controller;
 
+import br.com.andersonfariasdev.mvc.mudi.enumerator.StatusPedido;
+import br.com.andersonfariasdev.mvc.mudi.model.Pedido;
+import br.com.andersonfariasdev.mvc.mudi.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.andersonfariasdev.mvc.mudi.enumerator.StatusPedido;
-import br.com.andersonfariasdev.mvc.mudi.repository.PedidoRepository;
-
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -22,19 +23,12 @@ public class HomeController {
 
 	@GetMapping
 	public String home(Model model, Principal principal) {
-		model.addAttribute("pedidos", pedidoRepository.findAllByUsuario(principal.getName()));
+		Sort sort = Sort.by("dataEntrega").descending();
+		PageRequest paginacao = PageRequest.of(0, 10, sort);
+
+		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, paginacao);
+		model.addAttribute("pedidos", pedidos);
 		return "home";
 	}
 
-	@GetMapping("/{status}")
-	public String status(@PathVariable("status") String status, Model model) {
-		model.addAttribute("pedidos", pedidoRepository.findByStatus(StatusPedido.valueOf(status.toUpperCase())));
-		model.addAttribute("status", status);
-		return "home";
-	}
-
-	@ExceptionHandler(IllegalArgumentException.class)
-	public String onError() {
-		return "redirect:/home";
-	}
 }
