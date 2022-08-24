@@ -2,6 +2,7 @@ package br.com.andersonfariasdev.mvc.mudi.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,6 +26,9 @@ public class Pedido {
 	@JsonIgnore
 	private User user;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Oferta> ofertas;
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 	
@@ -77,5 +81,13 @@ public class Pedido {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
 	}
 }
