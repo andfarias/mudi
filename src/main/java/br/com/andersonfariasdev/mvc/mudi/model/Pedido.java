@@ -31,7 +31,11 @@ public class Pedido {
 	private List<Oferta> ofertas;
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
-	
+
+	public Long getId() {
+		return id;
+	}
+
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
